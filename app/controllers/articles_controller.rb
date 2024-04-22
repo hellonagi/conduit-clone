@@ -1,19 +1,36 @@
 class ArticlesController < ApplicationController
-  def home
-    @articles = Article.includes(:tags).limit(5)
-    @tags = Tag.limit(5)
+  def index
+    @articles = Article.includes(:tags).limit(10)
+    @tags = Tag.limit(10)
   end
 
   def show
     @article = Article.includes(:tags).find_by(slug: params[:slug])
-    if @article
-      render 'articles/article'
+  end
+
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(article_params)
+    if @article.save
+      flash[:success] = '投稿完了'
+      redirect_to article_url(@article.slug)
     else
-      render file: 'public/404.html', status: :not_found
+      render 'new', status: :unprocessable_entity
     end
   end
 
-  def editor; end
+  def update
+  end
 
-  def article; end
+  def destroy
+  end
+
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :description, :body)
+  end
 end

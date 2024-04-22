@@ -1,0 +1,23 @@
+<% provide(:title, "Editor") %>
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <%= form_with(model: @article, url: create_article_path) do |f| %>
+          <%= render 'shared/error_messages' %>
+
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+
+          <%= f.label :description %>
+          <%= f.text_field :description, class: 'form-control' %>
+
+          <%= f.label :body %>
+          <%= f.text_field :body, class: 'form-control' %>
+
+          <%= f.submit "Publish Article", class: "btn btn-lg pull-xs-right btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
