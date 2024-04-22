@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
   def setup
-    @article = Article.new(title: 'Title', description: 'a' * 100,
+    @article = Article.new(title: 'This is Title', description: 'a' * 100,
                            body: 'a' * 200)
   end
 
