@@ -3,7 +3,7 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
-        <%= form_with(model: @article, url: create_article_path) do |f| %>
+        <%= form_with(model: @article, url: api_articles_path) do |f| %>
           <%= render 'shared/error_messages' %>
 
           <%= f.label :title %>
