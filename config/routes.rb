@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/new'
   root 'articles#index'
   get '/article/:slug', to: 'articles#show', as: 'article'
   get '/editor', to: 'articles#new'
