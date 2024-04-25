@@ -48,7 +48,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select 'a[href=?]', root_path
     assert_select 'a[href=?]', editor_path, count: 0
-    assert_select 'a[href=?]', profile_path(@user.username), count: 0
+    assert_select 'a[href=?]', profile_path(@user.username)
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', register_path
   end
