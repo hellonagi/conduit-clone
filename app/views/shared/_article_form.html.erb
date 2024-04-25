@@ -1,0 +1,15 @@
+<%= form_with(model: @article, url: post_article_path) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <fieldset>
+    <fieldset class="form-group">
+      <%= f.text_field :title, class: 'form-control', placeholder: 'Article Title' %>
+    </fieldset>
+    <fieldset class="form-group">
+      <%= f.text_field :description, class: 'form-control', placeholder: "What's this article about?" %>
+    </fieldset>
+    <fieldset class="form-group">
+      <%= f.text_area :body, class: 'form-control', rows: "8", placeholder: "Write your article (in markdown)" %>
+    </fieldset>
+    <%= f.submit "Publish Article", class: "btn btn-lg pull-xs-right btn-primary" %>
+  </fieldset>
+<% end %>

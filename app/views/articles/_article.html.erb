@@ -1,9 +1,9 @@
 <div class="article-preview">
   <div class="article-meta">
-    <a href="/profile/eric-simons"><img src="https://i.imgur.com/Qr71crq.jpeg" /></a>
+    <a href="/profile/<%= article.user.username %>"><img src="https://i.imgur.com/Qr71crq.jpeg" /></a>
     <div class="info">
-      <a href="/profile/eric-simons" class="author"><%= article.user.username %></a>
-      <span class="date"><%= time_ago_in_words(article.created_at) %></span>
+      <a href="/profile/<%= article.user.username %>" class="author"><%= article.user.username %></a>
+      <span class="date"><%= article.created_at.strftime('%B %d, %Y') %></span>
     </div>
   </div>
   <a href="/article/<%= article.slug %>" class="preview-link">

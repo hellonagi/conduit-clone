@@ -14,7 +14,7 @@ class Article < ApplicationRecord
   private
 
   def generate_slug
-    slug_base = title.parameterize
+    slug_base = title ? title.parameterize : ''
     self.slug = "#{slug_base}-#{Time.now.to_i}"
   end
 end

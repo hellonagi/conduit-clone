@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:username])
+    @feed_items = current_user.feed.page(params[:page])
   end
 
   def new
@@ -44,16 +45,5 @@ class UsersController < ApplicationController
 
   def user_edit_params
     params.require(:user).permit(:username, :email, :image, :bio, :password)
-  end
-
-  # beforeフィルタ
-
-  # ログイン済みユーザーかどうか確認
-  def logged_in_user
-    return if logged_in?
-
-    store_location
-    flash[:danger] = 'Please log in.'
-    redirect_to login_url, status: :see_other
   end
 end

@@ -1,5 +1,6 @@
 orange:
   title: 'Title 1'
+  slug: 'title-1-1714081518'
   description: 'Description 1'
   body: 'Quia illum libero magni. 1'
   created_at: <%= 10.minutes.ago %>
@@ -7,6 +8,7 @@ orange:
 
 tau_manifesto:
   title: 'Title 2'
+  slug: 'title-2-1714081518'
   description: 'Description 2'
   body: 'Quia illum libero magni. 2'
   created_at: <%= 3.years.ago %>
@@ -14,14 +16,26 @@ tau_manifesto:
 
 cat_video:
   title: 'Title 3'
+  slug: 'title-3-1714081518'
   description: 'Description 3'
   body: 'Quia illum libero magni. 3'
   created_at: <%= 2.hours.ago %>
-  user: mike
+  user: john
 
 most_recent:
   title: 'Title 4'
+  slug: 'title-4-1714081518'
   description: 'Description 4'
   body: 'Quia illum libero magni. 4'
   created_at: <%= Time.zone.now %>
+  user: john
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  title: <%= Faker::Lorem.sentence(word_count: 2) %>
+  slug: 'title-<%= n+4 %>-1714081518'
+  description: <%= Faker::Lorem.sentence(word_count: 4) %>
+  body: <%= Faker::Lorem.paragraph(sentence_count: 5) %>
+  created_at: <%= 42.days.ago %>
   user: mike
+<% end %>

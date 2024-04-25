@@ -1,0 +1,23 @@
+<div class="article-meta">
+  <a href="/profile/<%= @article.user.username %>"><img src="<%= @article.user.image %>" /></a>
+  <div class="info">
+    <a href="/profile/<%= @article.user.username %>" class="author"><%= @article.user.username %></a>
+    <span class="date"><%= @article.created_at.strftime('%B %d, %Y') %></span>
+  </div>
+  <% if logged_in? %>
+    <button class="btn btn-sm btn-outline-secondary">
+      <i class="ion-plus-round"></i>
+      &nbsp; Follow <%= @article.user.username %>
+    </button>
+    &nbsp;
+    <% if current_user?(@article.user) %>
+      <%= link_to edit_article_path(@article.slug), class: 'btn btn-sm btn-outline-secondary' do %>
+        <i class="ion-edit"></i>&nbsp;Edit Article
+      <% end %>
+      <%= link_to delete_article_path(@article.slug), class: 'btn btn-sm btn-outline-danger', data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } do %>
+        <i class="ion-trash-a"></i> Delete Article
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
