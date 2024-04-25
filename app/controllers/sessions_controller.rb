@@ -4,11 +4,12 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user&.authenticate(params[:session][:password])
-      reset_session # ログインの直前に必ずこれを書くこと
+      forwarding_url = session[:forwarding_url]
+      reset_session
       log_in user
-      redirect_to profile_url(user.username)
+      redirect_to forwarding_url || profile_url(user.username)
     else
-      flash.now[:danger] = 'Invalid email/password combination' # 本当は正しくない
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity
     end
   end

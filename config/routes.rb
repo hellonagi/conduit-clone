@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   get '/editor/:slug', to: 'articles#edit'
   get '/register', to: 'users#new'
   get '/profile/:username', to: 'users#show', as: 'profile'
+  get '/settings', to: 'users#edit'
   get '/login', to: 'sessions#new'
 
   post '/api/articles', to: 'articles#create'
   patch '/api/articles/:slug', to: 'articles#update'
   delete '/api/articles/:slug', to: 'articles#destroy'
   post '/api/users', to: 'users#create'
+  patch '/api/user', to: 'users#update'
   post   '/api/users/login',   to: 'sessions#create'
   delete '/api/users/logout',  to: 'sessions#destroy'
 end

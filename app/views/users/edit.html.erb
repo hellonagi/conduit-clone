@@ -1,0 +1,35 @@
+<% provide(:title, 'Edit user') %>
+<div class="settings-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Your Settings</h1>
+        <%= form_with(model: @user, url: api_user_path) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <fieldset>
+            <fieldset class="form-group">
+              <%= f.text_field :image, class: 'form-control', placeholder: 'URL of profile picture' %>
+            </fieldset>
+            <fieldset class="form-group">
+              <%= f.text_field :username, class: 'form-control form-control-lg', placeholder: 'Your Name' %>
+            </fieldset>
+            <fieldset class="form-group">
+              <%= f.text_area :bio, class: 'form-control form-control-lg', rows: 8, placeholder: 'Short bio about you' %>
+            </fieldset>
+            <fieldset class="form-group">
+              <%= f.email_field :email, class: 'form-control form-control-lg', placeholder: 'Email' %>
+            </fieldset>
+            <fieldset class="form-group">
+              <%= f.password_field :password, class: 'form-control form-control-lg', placeholder: 'New Password' %>
+            </fieldset>
+            <%= f.submit "Update Settings", class: "btn btn-lg btn-primary pull-xs-right" %>
+          </fieldset>
+        <% end %>
+        <hr />
+        <%= link_to api_users_logout_path, data: { "turbo-method": :delete }, class: 'btn btn-outline-danger' do %>
+          Or click here to logout.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
