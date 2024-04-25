@@ -5,8 +5,10 @@ ruby '3.2.3'
 
 gem 'bcrypt', '3.1.18'
 gem 'bootsnap', '1.18.3', require: false
+gem 'faker', '2.21.0'
 gem 'importmap-rails', '2.0.1'
 gem 'jbuilder', '2.11.5'
+gem 'kaminari'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.8', '>= 7.0.8.1'
 gem 'sassc-rails', '2.1.2'

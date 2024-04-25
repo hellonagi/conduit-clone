@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.includes(:tags).limit(10)
+    @articles = Article.page(params[:page]).per(10)
     @tags = Tag.limit(10)
   end
 

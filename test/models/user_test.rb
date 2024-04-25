@@ -70,4 +70,12 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = 'a' * 7
     assert_not @user.valid?
   end
+
+  test 'associated microposts should be destroyed' do
+    @user.save
+    @user.articles.create!(title: 'Title', description: 'Description', body: 'Lorem ipsum')
+    assert_difference 'Article.count', -1 do
+      @user.destroy
+    end
+  end
 end

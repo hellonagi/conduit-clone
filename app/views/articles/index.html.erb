@@ -19,38 +19,16 @@
             </li>
           </ul>
         </div>
-        <% @articles.each do |article| %>
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href="/profile/eric-simons"><img src="https://i.imgur.com/Qr71crq.jpeg" /></a>
-              <div class="info">
-                <a href="/profile/eric-simons" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
-              </button>
-            </div>
-            <a href="/article/<%= article.slug %>" class="preview-link">
-              <h1><%= article.title %></h1>
-              <p><%= article.description %></p>
-              <span>Read more...</span>
-              <ul class="tag-list">
-                <% article.tags.each do |tag| %>
-                  <li class="tag-default tag-pill tag-outline"><%= tag.name %></li>
-                <% end %>
-              </ul>
-            </a>
-          </div>
-        <% end %>
-        <ul class="pagination">
+        <%= render @articles %>
+        <%# <ul class="pagination">
           <li class="page-item active">
             <a class="page-link" href="">1</a>
           </li>
           <li class="page-item">
             <a class="page-link" href="">2</a>
           </li>
-        </ul>
+        </ul> %>
+        <%= paginate @articles %>
       </div>
       <div class="col-md-3">
         <div class="sidebar">
