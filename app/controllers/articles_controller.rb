@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :logged_in_user, only: %i[create destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: %i[new edit create update destroy]
+  before_action :correct_user,   only: %i[edit update destroy]
 
   def index
     @articles = Article.page(params[:page])
@@ -22,15 +22,21 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.build(article_params)
     if @article.save
-      flash[:success] = '投稿完了'
+      flash[:success] = 'Article posted'
       redirect_to article_url(@article.slug)
     else
-      @feed_items = current_user.feed.page(params[:page])
       render 'new', status: :unprocessable_entity
     end
   end
 
-  def update; end
+  def update
+    if @article.update(article_params)
+      flash[:success] = 'Article updated'
+      redirect_to article_url(@article.slug)
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
 
   def destroy
     @article.destroy
