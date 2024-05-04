@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.includes(:tags).find_by(slug: params[:slug])
+    @article = Article.find_by(slug: params[:slug])
   end
 
   def new
@@ -21,7 +21,12 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.build(article_params)
+    tag_list = params[:article][:tag_list]
     if @article.save
+      if tag_list.present?
+        tags = tag_list.split(',').map(&:strip).uniq
+        create_or_update_article_tags(@article, tags)
+      end
       flash[:success] = 'Article posted'
       redirect_to article_url(@article.slug)
     else
@@ -30,7 +35,12 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    tag_list = params[:article][:tag_list]
     if @article.update(article_params)
+      if tag_list.present?
+        tags = tag_list.split(',').map(&:strip).uniq
+        create_or_update_article_tags(@article, tags)
+      end
       flash[:success] = 'Article updated'
       redirect_to article_url(@article.slug)
     else
@@ -57,5 +67,16 @@ class ArticlesController < ApplicationController
   def correct_user
     @article = current_user.articles.find_by(slug: params[:slug])
     redirect_to root_url, status: :see_other if @article.nil?
+  end
+
+  def create_or_update_article_tags(article, tags)
+    article.tags.destroy_all
+
+    tags.each do |tag|
+      tag = Tag.find_or_create_by(name: tag)
+      article.tags << tag
+    rescue ActiveRecord::RecordInvalid
+      false
+    end
   end
 end

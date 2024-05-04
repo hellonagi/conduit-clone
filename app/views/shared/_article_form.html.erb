@@ -1,9 +1,10 @@
+<%= javascript_import_module_tag "custom/tagging" %>
 <% if ['new', 'create'].include?(action_name) %>
   <% url = post_article_path %>
 <% elsif action_name == 'edit' %>
   <% url = patch_article_path %>
 <% end %>
-<%= form_with(model: @article, url: url) do |f| %>
+<%= form_with(model: @article, url: url, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <fieldset>
     <fieldset class="form-group">
@@ -16,8 +17,9 @@
       <%= f.text_area :body, class: 'form-control', rows: "8", placeholder: "Write your article (in markdown)" %>
     </fieldset>
     <fieldset class="form-group">
-      <%= f.text_field :tags, class: 'form-control', placeholder: "Enter tags" %>
+      <%= f.text_field :tags, value: nil, class: 'form-control', placeholder: "Enter tags" %>
     </fieldset>
+    <%= f.hidden_field :tag_list, value: @article.tags.map(&:name), id: 'hidden-tag-list' %>
     <div id="tag-list" class="tag-list">
     </div>
     <%= f.submit "Publish Article", class: "btn btn-lg pull-xs-right btn-primary" %>

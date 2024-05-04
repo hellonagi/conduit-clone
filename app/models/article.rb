@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :user
-  has_many :article_tags
+  has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags
   default_scope -> { order(created_at: :desc) }
   before_validation :generate_slug, on: :create
