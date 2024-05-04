@@ -26,3 +26,14 @@ users = User.order(:created_at).take(6)
     user.articles.create!(title:, description:, body:)
   end
 end
+
+30.times do
+  Tag.create!(name: Faker::Lorem.unique.word)
+end
+
+Article.all.each do |article|
+  tags = Tag.order('RANDOM()').limit(rand(1..5))
+  tags.each do |tag|
+    ArticleTag.create!(article_id: article.id, tag_id: tag.id)
+  end
+end
