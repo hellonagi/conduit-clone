@@ -1,12 +1,14 @@
 <div class="article-preview">
   <div class="article-meta">
-    <a href="/profile/<%= article.user.username %>"><img src="https://i.imgur.com/Qr71crq.jpeg" /></a>
+    <%= link_to profile_path(article.user.username) do %>
+      <img src="<%= article.user.image %>" />
+    <% end %>
     <div class="info">
-      <a href="/profile/<%= article.user.username %>" class="author"><%= article.user.username %></a>
+      <%= link_to article.user.username, profile_path(article.user.username), class: 'author' %>
       <span class="date"><%= article.created_at.strftime('%B %d, %Y') %></span>
     </div>
   </div>
-  <a href="/article/<%= article.slug %>" class="preview-link">
+  <%= link_to article_path(article.slug), class: 'preview-link' do %>
     <h1><%= article.title %></h1>
     <p><%= article.description %></p>
     <span>Read more...</span>
@@ -15,5 +17,5 @@
         <li class="tag-default tag-pill tag-outline"><%= tag.name %></li>
       <% end %>
     </ul>
-  </a>
+  <% end %>
 </div>
