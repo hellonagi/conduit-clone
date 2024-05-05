@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-block">
+    <p class="card-text">
+      <%= comment.body %>
+    </p>
+  </div>
+  <div class="card-footer">
+    <a href="/profile/author" class="comment-author">
+      <%= link_to profile_path(comment.user.username), class: 'comment-author' do %>
+        <img src="<%= comment.user.image %>" class="comment-author-img" />
+      <% end %>
+      &nbsp;
+      <%= link_to comment.user.username, profile_path(comment.user.username), class: 'comment-author' %>
+      <span class="date-posted"><%= comment.created_at.strftime('%B %-d, %Y') %></span>
+      <% if current_user?(comment.user) %>
+        <%= link_to delete_comment_path(@article.slug, comment.id), class: 'btn btn-sm btn-outline-danger', data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } do %>
+          <i class="ion-trash-a"></i> Delete Comment
+        <% end %>
+      <%end%>
+    </div>
+  </div>

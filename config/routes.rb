@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post '/api/articles', to: 'articles#create', as: 'post_article'
   patch '/api/articles/:slug', to: 'articles#update', as: 'patch_article'
   delete '/api/articles/:slug', to: 'articles#destroy', as: 'delete_article'
+  post '/api/articles/:slug/comments', to: 'comments#create', as: 'post_comment'
+  delete '/api/articles/:slug/comments/:id', to: 'comments#destroy', as: 'delete_comment'
   post '/api/users', to: 'users#create'
   patch '/api/user', to: 'users#update'
   post   '/api/users/login',   to: 'sessions#create'

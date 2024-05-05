@@ -2,7 +2,7 @@
   <a href="/profile/<%= @article.user.username %>"><img src="<%= @article.user.image %>" /></a>
   <div class="info">
     <a href="/profile/<%= @article.user.username %>" class="author"><%= @article.user.username %></a>
-    <span class="date"><%= @article.created_at.strftime('%B %d, %Y') %></span>
+    <span class="date"><%= @article.created_at.strftime('%B %-d, %Y') %></span>
   </div>
   <% if logged_in? %>
     <button class="btn btn-sm btn-outline-secondary">

@@ -1,4 +1,4 @@
 <% 30.times do |n| %>
 tag_<%= n %>:
-  name: <%= Faker::Lorem.word %>
+  name: <%= Faker::Lorem.unique.word %>
 <% end %>
