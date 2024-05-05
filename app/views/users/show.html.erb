@@ -13,14 +13,17 @@
           <p>
             <%= @user.bio %>
           </p>
-          <button class="btn btn-sm btn-outline-secondary action-btn">
-            <i class="ion-plus-round"></i>
-            &nbsp; Follow Eric Simons
-          </button>
-          <button class="btn btn-sm btn-outline-secondary action-btn">
-            <i class="ion-gear-a"></i>
-            &nbsp; Edit Profile Settings
-          </button>
+          <% if current_user?(@user) %>
+            <%= link_to settings_path, class: 'btn btn-sm btn-outline-secondary action-btn' do %>
+              <i class="ion-gear-a"></i>
+              &nbsp; Edit Profile Settings
+            <% end %>
+          <% elsif logged_in? %>
+            <button class="btn btn-sm btn-outline-secondary action-btn">
+              <i class="ion-plus-round"></i>
+              &nbsp; Follow <%= @user.username %>
+            </button>
+          <% end %>
         </div>
       </div>
     </div>

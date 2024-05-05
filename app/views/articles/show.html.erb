@@ -23,14 +23,16 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-        <%= form_with(model: @comment, url: post_comment_path(@article.slug), class: 'card comment-form', local: true) do |f| %>
-          <div class="card-block">
-            <%= f.text_area :body, class: 'form-control', rows: 3, placeholder: "Write a comment..." %>
-          </div>
-          <div class="card-footer">
-            <img src="<%= current_user.image %>" class="comment-author-img" />
-            <%= f.submit "Post Comment", class: "btn btn-sm btn-primary" %>
-          </div>
+        <% if logged_in? %>
+          <%= form_with(model: @comment, url: post_comment_path(@article.slug), class: 'card comment-form', local: true) do |f| %>
+            <div class="card-block">
+              <%= f.text_area :body, class: 'form-control', rows: 3, placeholder: "Write a comment..." %>
+            </div>
+            <div class="card-footer">
+              <img src="<%= current_user.image %>" class="comment-author-img" />
+              <%= f.submit "Post Comment", class: "btn btn-sm btn-primary" %>
+            </div>
+          <% end %>
         <% end %>
         <%= render partial: 'articles/comment', collection: @comments %>
       </div>

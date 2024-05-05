@@ -5,11 +5,13 @@
     <span class="date"><%= @article.created_at.strftime('%B %-d, %Y') %></span>
   </div>
   <% if logged_in? %>
-    <button class="btn btn-sm btn-outline-secondary">
-      <i class="ion-plus-round"></i>
-      &nbsp; Follow <%= @article.user.username %>
-    </button>
-    &nbsp;
+    <% unless current_user?(@article.user) %>
+      <button class="btn btn-sm btn-outline-secondary">
+        <i class="ion-plus-round"></i>
+        &nbsp; Follow <%= @article.user.username %>
+      </button>
+      &nbsp;
+    <% end %>
     <% if current_user?(@article.user) %>
       <%= link_to edit_article_path(@article.slug), class: 'btn btn-sm btn-outline-secondary' do %>
         <i class="ion-edit"></i>&nbsp;Edit Article

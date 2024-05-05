@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:username])
-    @feed_items = current_user.feed.page(params[:page])
+    @feed_items = @user.feed.page(params[:page])
   end
 
   def new
